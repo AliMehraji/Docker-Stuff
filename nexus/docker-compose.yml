@@ -1,0 +1,25 @@
+---
+version: "3.9"
+
+services:
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus-registry
+    expose:
+      - 8081
+      - 8082
+      - 8083
+    ports:
+    # Port 8081 is for web UI
+    # All other Ports are for interacting with it 
+    # You can change 8082 or 8083 with your desired ports.
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    volumes:
+      - data:/nexus-data
+    restart: always
+
+volumes:
+  data:
+...
