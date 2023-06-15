@@ -39,6 +39,10 @@ services:
        - "/var/postgres-metabase:/data/postgres"
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      retries: 5
     restart: unless-stopped
 
 volumes:
