@@ -1,0 +1,47 @@
+---
+version: "3.9"
+
+services:
+  metabase:
+    image: "metabase/metabase:latest"
+    restart: unless-stopped
+    container_name: metabase-service
+    environment:
+      - "TZ:Asia/Tehran"
+      - "JAVA_TIMEZONE=Asia/Tehran"
+      - "MB_DB_TYPE=postgres"
+      - "MB_DB_DBNAME=metabase"
+      - "MB_DB_PORT=5432"
+      - "MB_DB_USER=postgres"
+      - "MB_DB_PASS=<Your-Strong-Password>"
+      - "MB_DB_HOST=postgres-metabase"
+    volumes:
+      - "metabase-data:/metabase-data:rw"
+      - "metabase.db:/metabase.db"
+    depends_on:
+      - postgres
+    ports:
+      - "3001:3000"
+    healthcheck:
+      test: curl --fail -I http://localhost:3000/api/health || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    container_name: postgres-metabase
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-<Your-Strong-Password>}
+      PGDATA: /data/postgres
+    volumes:
+       - "/var/postgres-metabase:/data/postgres"
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  metabase-data:
+  metabase.db:
+...

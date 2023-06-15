@@ -1,0 +1,14 @@
+---
+version: "3.9"
+
+services:
+  cerebro:
+    image: lmenezes/cerebro:latest
+    container_name: "cerebro"
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+    volumes:
+      - "/etc/cerebro/application.conf:/opt/cerebro/conf/application.conf"
+...
+
