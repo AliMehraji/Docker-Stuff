@@ -22,6 +22,8 @@ shutdown_timeout = 0
   token_obtained_at = 2023-06-04T16:16:18Z
   token_expires_at = 0001-01-01T00:00:00Z
   executor = "docker"
+  # Cache Dir must the same in volumes
+  cache_dir = "/cache"
   # For using overlay2 instead of VFS Docker default , add below line in config.toml
   # And Use DOCKER_DRIVER: overlay2 in gitlab-ci.yml in variables
   environment = ["DOCKER_DRIVER=overlay2"]
