@@ -26,7 +26,7 @@ shutdown_timeout = 0
   cache_dir = "/cache"
   # For using overlay2 instead of VFS Docker default , add below line in config.toml
   # And Use DOCKER_DRIVER: overlay2 in gitlab-ci.yml in variables
-  environment = ["DOCKER_DRIVER=overlay2"]
+  # environment = ["DOCKER_DRIVER=overlay2"]
   [runners.cache]
     MaxUploadedArchiveSize = 0
   [runners.docker]
