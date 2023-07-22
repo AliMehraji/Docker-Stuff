@@ -6,7 +6,7 @@ shutdown_timeout = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "Canada-Shell"
+  name = "Shell-Executor"
   url = "https://gitlab.com"
   id = 23998969
   token = "MY-AWESOME-TOKEN"
@@ -22,14 +22,13 @@ shutdown_timeout = 0
   token_obtained_at = 2023-06-04T16:16:18Z
   token_expires_at = 0001-01-01T00:00:00Z
   executor = "docker"
-  # For using overlay2 instead of VFS Docker default , add below line in config.toml
-  # And Use DOCKER_DRIVER: overlay2 in gitlab-ci.yml in variables
-  environment = ["DOCKER_DRIVER=overlay2"]
+  cache_dir = "/cache"
   [runners.cache]
     MaxUploadedArchiveSize = 0
   [runners.docker]
     tls_verify = false
     image = "docker:23.0.1"
+    # Set Privileget To True to run docker commands in docker image (dind)
     privileged = true
     disable_entrypoint_overwrite = false
     oom_kill_disable = false
